@@ -49,6 +49,7 @@
     font-family: 'seven segment';
     text-align: right;
     padding: 5px 3px;
+    min-height: 22px;
 }
 
  /* PULSANTI PER CALCOLARE */
