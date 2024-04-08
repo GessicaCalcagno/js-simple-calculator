@@ -2,11 +2,18 @@
 let displayresult = document.querySelector(".result");
 console.log(displayresult);
 
-//prendo tutti i numeri
+// Volevo impostare il display a 0 al caricamento della pagina
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector(".result").textContent = "0";
+});
+
+//Prendo tutti i numeri con la classe
 const number = document.querySelectorAll(".number");
 console.log(number, typeof number);
 
-//Stampo in cosole la lista dei numeri e controllo che sia stringa vuota se inserisco 0 o gli operatori
+//Stampo in console la lista dei numeri con il ciclo for [i] e controllo che sia stringa vuota se inserisco 0 o gli operatori.
+
+//Aggiungo parseInt per assicurarmi che prenda solo numeri
 for (let i = 0; i < number.length; i++) {
   console.log(number[i].innerHTML, typeof number);
 
@@ -15,6 +22,7 @@ for (let i = 0; i < number.length; i++) {
   btnNumb.addEventListener("click", function () {
     // console.log(this.innerHTML, typeof this);
 
+    //Inserisco un controllo per non stampare in display gli operatori e lo zero
     if (
       displayresult.innerHTML === "0" ||
       displayresult.innerHTML === "+" ||
@@ -31,7 +39,7 @@ for (let i = 0; i < number.length; i++) {
 
 //____________________OPERATORS_________________________
 
-//Prendo tuti gli operatori
+//Prendo tutti gli operatori
 const operators = document.querySelectorAll(".op");
 console.log(operators);
 
@@ -46,7 +54,7 @@ for (let i = 0; i < operators.length; i++) {
   btnOp.addEventListener("click", function () {
     console.log(btnOp.innerHTML);
 
-    // salvo operatore cliccato in una variabile
+    // Salvo operatore cliccato in una variabile
     if (this.innerHTML === "+") {
       operator = "+";
     } else if (this.innerHTML === "-") {
@@ -57,9 +65,10 @@ for (let i = 0; i < operators.length; i++) {
       operator = "÷";
     }
     operator = this.textContent;
-    // Salvo il primo numero selezionato
+    // Salvo il primo numero selezionato e mi assicuro che sia un numero
     firstNumber = parseInt(displayresult.textContent);
-    // Resetto il numero visualizzato in alto
+
+    // Resetto il numero visualizzato nel display appena clicco gli operatori
     displayresult.textContent = "";
     console.log(firstNumber);
   });
@@ -76,7 +85,7 @@ equalBtn.addEventListener("click", function () {
   let secondOperand = displayresult.textContent;
   let finalResult;
 
-  // Effettuo il calcolo corretto in base all'operatore selezionato
+  // Effettuo il calcolo corretto FINALMENTE in base all'operatore selezionato
   switch (operator) {
     case "+":
       finalResult = parseInt(firstNumber) + parseInt(secondOperand);
@@ -88,7 +97,12 @@ equalBtn.addEventListener("click", function () {
       finalResult = parseInt(firstNumber) * parseInt(secondOperand);
       break;
     case "÷":
-      finalResult = parseInt(firstNumber) / parseInt(secondOperand);
+      //Bonus: aggiungo che se cerco di dividere per 0 mi da error
+      if (parseInt(secondOperand) === 0) {
+        finalResult = "Impossible";
+      } else {
+        finalResult = "0";
+      }
       break;
     default:
       finalResult = " ";
@@ -99,7 +113,7 @@ equalBtn.addEventListener("click", function () {
   console.log(finalResult);
 });
 
-//_________________ Canceled___________
+//____________ Canceled___________
 const resetButton = document.querySelector(".delete");
 resetButton.addEventListener("click", function () {
   displayresult.textContent = "0";

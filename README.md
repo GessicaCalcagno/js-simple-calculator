@@ -22,6 +22,7 @@ quando si clicca su =, salvare il secondo operando, effetuare il calcolo corrett
 
 MILESTONE 4
 pulsante canc: cliccando il pulsante si resetta il calcolo
-:stella2: BONUS
+
+BONUS:
 verificare che non si stia cercando di dividere per 0
 Se non avete completato il layout della calcolatrice potete usare il codice che vi invio in allegato
