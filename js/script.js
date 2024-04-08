@@ -61,38 +61,46 @@ for (let i = 0; i < operators.length; i++) {
     firstNumber = parseInt(displayresult.textContent);
     // Resetto il numero visualizzato in alto
     displayresult.textContent = "";
-    console.log(firstNumber)
+    console.log(firstNumber);
   });
 }
 
-//_________________________EQUAL____________________
+//__________________EQUAL____________________
 
 // Prendo il pulsante "="
- const equalBtn = document.querySelector(".equal");
+const equalBtn = document.querySelector(".equal");
 
- // Aggiungo un event listener per il click sul pulsante "="
- equalBtn.addEventListener("click", function () {
-     // Salvo il secondo operando
-    let secondOperand = displayresult.textContent;
-     let finalResult;
+// Aggiungo un event listener per il click sul pulsante "="
+equalBtn.addEventListener("click", function () {
+  // Salvo il secondo operando
+  let secondOperand = displayresult.textContent;
+  let finalResult;
+
   // Effettuo il calcolo corretto in base all'operatore selezionato
-   switch (operator) {
-      case "+":
-           finalResult = parseInt(firstNumber) + parseInt(secondOperand);
-           break;
-        case "-":
-            finalResult = parseInt(firstNumber) - parseInt(secondOperand);
-            break;
-        case "x":
-            finalResult = parseInt(firstNumber) * parseInt(secondOperand);
-            break;
-        case "÷":
-            finalResult = parseInt(firstNumber) / parseInt(secondOperand);
-            break;
-        default:
-            finalResult = " ";
-    }
+  switch (operator) {
+    case "+":
+      finalResult = parseInt(firstNumber) + parseInt(secondOperand);
+      break;
+    case "-":
+      finalResult = parseInt(firstNumber) - parseInt(secondOperand);
+      break;
+    case "x":
+      finalResult = parseInt(firstNumber) * parseInt(secondOperand);
+      break;
+    case "÷":
+      finalResult = parseInt(firstNumber) / parseInt(secondOperand);
+      break;
+    default:
+      finalResult = " ";
+  }
 
-    // Visualizzo il risultato in alto
-    displayresult.textContent = finalResult ;
+  // Vedo il risultato nel display ed in console
+  displayresult.textContent = finalResult;
+  console.log(finalResult);
+});
+
+//_________________ Canceled___________
+const resetButton = document.querySelector(".delete");
+resetButton.addEventListener("click", function () {
+  displayresult.textContent = "0";
 });
