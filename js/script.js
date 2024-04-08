@@ -1,28 +1,42 @@
 //Prendo il display dove stampare i numeri
-const result = document.querySelector(".result");
-console.log(result);
+let displayresult = document.querySelector(".result");
+console.log(displayresult);
 
 //prendo tutti i numeri
 const number = document.querySelectorAll(".number");
-console.log(number);
+console.log(number, typeof number);
 
+//Stampo in cosole la lista dei numeri e controllo che sia stringa vuota se inserisco 0 o gli operatori
 for (let i = 0; i < number.length; i++) {
-  console.log(number[i].innerHTML);
+  console.log(number[i].innerHTML, typeof number);
+
   let btnNumb = number[i];
 
   btnNumb.addEventListener("click", function () {
-    console.log(this.innerHTML);
-    result.textContent += this.textContent;
-    currentOp += this.textContent;
+    // console.log(this.innerHTML, typeof this);
+
+    if (
+      displayresult.innerHTML === "0" ||
+      displayresult.innerHTML === "+" ||
+      displayresult.innerHTML === "-" ||
+      displayresult.innerHTML === "x" ||
+      displayresult.innerHTML === "÷"
+    ) {
+      displayresult.innerHTML = "";
+    }
+    displayresult.textContent += parseInt(this.textContent);
+    console.log(parseInt(this.textContent));
   });
 }
 
 //____________________OPERATORS_________________________
 
+//Prendo tuti gli operatori
 const operators = document.querySelectorAll(".op");
 console.log(operators);
 
-let currentOp = "";
+// Variabili per il primo numero che scrivo e l'operatore
+let firstNumber = "";
 let operator = "";
 
 for (let i = 0; i < operators.length; i++) {
@@ -30,19 +44,55 @@ for (let i = 0; i < operators.length; i++) {
   let btnOp = operators[i];
 
   btnOp.addEventListener("click", function () {
-    console.log(this.innerHTML);
+    console.log(btnOp.innerHTML);
 
-    //Se non è una stringa vuota allora posso fare le operazini
-    if (currentOp !== "") {
-      switch (this.textContent) {
-        case "+":
-        case "-":
-        case "x":
-        case "÷":
-          operator = this.textContent;
-          result.textContent = "";
-          break;
-      }
+    // salvo operatore cliccato in una variabile
+    if (this.innerHTML === "+") {
+      operator = "+";
+    } else if (this.innerHTML === "-") {
+      operator = "-";
+    } else if (this.innerHTML === "x") {
+      operator = "x";
+    } else if (this.innerHTML === "÷") {
+      operator = "÷";
     }
+    operator = this.textContent;
+    // Salvo il primo numero selezionato
+    firstNumber = parseInt(displayresult.textContent);
+    // Resetto il numero visualizzato in alto
+    displayresult.textContent = "";
+    console.log(firstNumber)
   });
 }
+
+//_________________________EQUAL____________________
+
+// Prendo il pulsante "="
+ const equalBtn = document.querySelector(".equal");
+
+ // Aggiungo un event listener per il click sul pulsante "="
+ equalBtn.addEventListener("click", function () {
+     // Salvo il secondo operando
+    let secondOperand = displayresult.textContent;
+     let finalResult;
+  // Effettuo il calcolo corretto in base all'operatore selezionato
+   switch (operator) {
+      case "+":
+           finalResult = parseInt(firstNumber) + parseInt(secondOperand);
+           break;
+        case "-":
+            finalResult = parseInt(firstNumber) - parseInt(secondOperand);
+            break;
+        case "x":
+            finalResult = parseInt(firstNumber) * parseInt(secondOperand);
+            break;
+        case "÷":
+            finalResult = parseInt(firstNumber) / parseInt(secondOperand);
+            break;
+        default:
+            finalResult = " ";
+    }
+
+    // Visualizzo il risultato in alto
+    displayresult.textContent = finalResult ;
+});
