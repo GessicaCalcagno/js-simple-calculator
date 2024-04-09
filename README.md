@@ -6,15 +6,9 @@ aggiungere event listener a tutti i numeri (0-9)
 quando si clicca su un numero, concatenarlo al numero visualizzato in alto.
 
 
-
-
-
 MILESTONE 2
 aggiungere event listener a tutti gli operatori
 quando si clicca su un operatore, salvare l'operatore cliccato e il primo operando, quindi resettare il numero in alto
-
-
-
 
 MILESTONE 3
 aggiungere event listener al pulsante =
@@ -25,4 +19,3 @@ pulsante canc: cliccando il pulsante si resetta il calcolo
 
 BONUS:
 verificare che non si stia cercando di dividere per 0
-Se non avete completato il layout della calcolatrice potete usare il codice che vi invio in allegato

@@ -2,11 +2,6 @@
 let displayresult = document.querySelector(".result");
 console.log(displayresult);
 
-// Volevo impostare il display a 0 al caricamento della pagina
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector(".result").textContent = "0";
-});
-
 //Prendo tutti i numeri con la classe
 const number = document.querySelectorAll(".number");
 console.log(number, typeof number);
@@ -15,25 +10,14 @@ console.log(number, typeof number);
 
 //Aggiungo parseInt per assicurarmi che prenda solo numeri
 for (let i = 0; i < number.length; i++) {
-  console.log(number[i].innerHTML, typeof number);
+  console.log(number[i].innerHTML, typeof number); // Object (Elemnto HTML)
 
   let btnNumb = number[i];
 
   btnNumb.addEventListener("click", function () {
-    // console.log(this.innerHTML, typeof this);
-
     //Inserisco un controllo per non stampare in display gli operatori e lo zero
-    if (
-      displayresult.innerHTML === "0" ||
-      displayresult.innerHTML === "+" ||
-      displayresult.innerHTML === "-" ||
-      displayresult.innerHTML === "x" ||
-      displayresult.innerHTML === "÷"
-    ) {
-      displayresult.innerHTML = "";
-    }
-    displayresult.textContent += parseInt(this.textContent);
-    console.log(parseInt(this.textContent));
+    displayresult.textContent += this.textContent;
+    displayresult.textContent = parseInt(displayresult.textContent);
   });
 }
 
@@ -54,23 +38,12 @@ for (let i = 0; i < operators.length; i++) {
   btnOp.addEventListener("click", function () {
     console.log(btnOp.innerHTML);
 
-    // Salvo operatore cliccato in una variabile
-    if (this.innerHTML === "+") {
-      operator = "+";
-    } else if (this.innerHTML === "-") {
-      operator = "-";
-    } else if (this.innerHTML === "x") {
-      operator = "x";
-    } else if (this.innerHTML === "÷") {
-      operator = "÷";
-    }
     operator = this.textContent;
     // Salvo il primo numero selezionato e mi assicuro che sia un numero
     firstNumber = parseInt(displayresult.textContent);
 
     // Resetto il numero visualizzato nel display appena clicco gli operatori
-    displayresult.textContent = "";
-    console.log(firstNumber);
+    displayresult.textContent = "0";
   });
 }
 
@@ -82,7 +55,7 @@ const equalBtn = document.querySelector(".equal");
 // Aggiungo un event listener per il click sul pulsante "="
 equalBtn.addEventListener("click", function () {
   // Salvo il secondo operando
-  let secondOperand = displayresult.textContent;
+  let secondOperand = parseInt(displayresult.textContent);
   let finalResult;
 
   // Effettuo il calcolo corretto FINALMENTE in base all'operatore selezionato
@@ -101,20 +74,32 @@ equalBtn.addEventListener("click", function () {
       if (parseInt(secondOperand) === 0) {
         finalResult = "Impossible";
       } else {
-        finalResult = "0";
+        finalResult = parseInt(firstNumber) / parseInt(secondOperand);
       }
       break;
     default:
-      finalResult = " ";
+      finalResult = null;
   }
 
   // Vedo il risultato nel display ed in console
   displayresult.textContent = finalResult;
+
+  console.log(firstNumber);
+  console.log(secondOperand);
   console.log(finalResult);
 });
 
 //____________ Canceled___________
 const resetButton = document.querySelector(".delete");
 resetButton.addEventListener("click", function () {
+  //reset display
   displayresult.textContent = "0";
+  //reset primo numero dell'operazione
+  firstNumber = "0";
+  //reset secondo numero dell'operazione
+  secondOperand = null;
+  //reset operatori
+  operator = null;
 });
+
+
