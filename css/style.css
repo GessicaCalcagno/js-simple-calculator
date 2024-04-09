@@ -50,6 +50,7 @@
     text-align: right;
     padding: 5px 3px;
     min-height: 22px;
+    /* overflow-x: auto; */
 }
 
  /* PULSANTI PER CALCOLARE */

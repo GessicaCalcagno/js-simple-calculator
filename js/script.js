@@ -1,13 +1,15 @@
+//_______________DISPLAY__________________
 //Prendo il display dove stampare i numeri
 let displayresult = document.querySelector(".result");
 console.log(displayresult);
 
+
+//_________________NUMBERS_______________________
 //Prendo tutti i numeri con la classe
 const number = document.querySelectorAll(".number");
 console.log(number, typeof number);
 
-//Stampo in console la lista dei numeri con il ciclo for [i] e controllo che sia stringa vuota se inserisco 0 o gli operatori.
-
+//Stampo in console la lista dei numeri con il ciclo for [i]
 //Aggiungo parseInt per assicurarmi che prenda solo numeri
 for (let i = 0; i < number.length; i++) {
   console.log(number[i].innerHTML, typeof number); // Object (Elemnto HTML)
@@ -20,6 +22,7 @@ for (let i = 0; i < number.length; i++) {
     displayresult.textContent = parseInt(displayresult.textContent);
   });
 }
+
 
 //____________________OPERATORS_________________________
 
@@ -85,6 +88,7 @@ equalBtn.addEventListener("click", function () {
   displayresult.textContent = finalResult;
 
   console.log(firstNumber);
+  console.log(operator);
   console.log(secondOperand);
   console.log(finalResult);
 });
