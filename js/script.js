@@ -3,7 +3,6 @@
 let displayresult = document.querySelector(".result");
 console.log(displayresult);
 
-
 //_________________NUMBERS_______________________
 //Prendo tutti i numeri con la classe
 const number = document.querySelectorAll(".number");
@@ -17,12 +16,10 @@ for (let i = 0; i < number.length; i++) {
   let btnNumb = number[i];
 
   btnNumb.addEventListener("click", function () {
-    //Inserisco un controllo per non stampare in display gli operatori e lo zero
     displayresult.textContent += this.textContent;
     displayresult.textContent = parseInt(displayresult.textContent);
   });
 }
-
 
 //____________________OPERATORS_________________________
 
@@ -35,8 +32,9 @@ let firstNumber = "";
 let operator = "";
 
 for (let i = 0; i < operators.length; i++) {
-  console.log(operators[i].innerHTML);
+  console.log(operators[i].innerHTML, typeof operator); //String
   let btnOp = operators[i];
+  //console.log(btnOp); // Object
 
   btnOp.addEventListener("click", function () {
     console.log(btnOp.innerHTML);
@@ -61,7 +59,7 @@ equalBtn.addEventListener("click", function () {
   let secondOperand = parseInt(displayresult.textContent);
   let finalResult;
 
-  // Effettuo il calcolo corretto FINALMENTE in base all'operatore selezionato
+  // Effettuo il calcolo corretto in base all'operatore selezionato
   switch (operator) {
     case "+":
       finalResult = parseInt(firstNumber) + parseInt(secondOperand);
@@ -73,13 +71,17 @@ equalBtn.addEventListener("click", function () {
       finalResult = parseInt(firstNumber) * parseInt(secondOperand);
       break;
     case "÷":
-      //Bonus: aggiungo che se cerco di dividere per 0 mi da error
-      if (parseInt(secondOperand) === 0) {
-        finalResult = "Impossible";
-      } else {
-        finalResult = parseInt(firstNumber) / parseInt(secondOperand);
+      //Bonus: aggiungo che se cerco di dividere per 0 mi da error/impossibile
+      if (operator !== "") {
+        if (parseInt(secondOperand) === 0) {
+          finalResult = "ERROR";
+        } else {
+          finalResult = parseInt(firstNumber) / parseInt(secondOperand);
+        }
       }
+
       break;
+
     default:
       finalResult = null;
   }
@@ -87,10 +89,13 @@ equalBtn.addEventListener("click", function () {
   // Vedo il risultato nel display ed in console
   displayresult.textContent = finalResult;
 
-  console.log(firstNumber);
-  console.log(operator);
-  console.log(secondOperand);
-  console.log(finalResult);
+  console.log(
+    firstNumber,
+    operator,
+    secondOperand,
+    equalBtn.innerHTML,
+    finalResult
+  );
 });
 
 //____________ Canceled___________
@@ -105,5 +110,3 @@ resetButton.addEventListener("click", function () {
   //reset operatori
   operator = null;
 });
-
-
